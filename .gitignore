@@ -1,0 +1,11 @@
+# Environment variables
+.env
+.env.*
+
+# Virtual environments
+adaptive_rag/
+.adaptive_rag/
+
+# Chromadb
+chroma_langchain_db/
+.chroma_langchain_db/

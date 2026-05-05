@@ -2,10 +2,11 @@ from typing import Any, Dict
 from src.workflow.chains.retrieval_grader import retrieval_grader
 from src.workflow.state import GraphState
 
+
 def grade_documents(state: GraphState) -> Dict[str, Any]:
     """
-    Determines whether the retrieved documents are relevant to the question
-    If any document is not relevant, we will set a flag to run web search
+    Determines whether the retrieved documents are relevant to the question.
+    If any document is not relevant, we will set a flag to run web search.
 
     Args:
         state (dict): The current graph state
@@ -25,18 +26,22 @@ def grade_documents(state: GraphState) -> Dict[str, Any]:
         score = retrieval_grader.invoke(
             {
                 "question": question,
-                "document": d.page_content
+                "document": d.page_content,
             }
         )
 
         grade = score.binary_score
 
-        if grade.lower() == "yes":
+        # FIX: binary_score is a bool, not a string — compare directly
+        if grade is True:
             print("---GRADE: RELEVANT---")
             filtered_docs.append(d)
         else:
             print("---GRADE: NOT RELEVANT---")
             web_search = True
-            continue
-    
-    return {"documents": filtered_docs, "question": question, "web_search": web_search}
+
+    return {
+        "documents": filtered_docs,
+        "question": question,
+        "web_search": web_search,
+    }

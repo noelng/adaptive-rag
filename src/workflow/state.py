@@ -6,6 +6,7 @@ class GraphState(TypedDict):
     generation: str         # LLM generated response
     web_search: bool        # Control flag for web search requirement
     documents: List[str]    # Retrieved documents relevant to the query
+    retry_count: int        # Number of generate→grade loop iterations (prevents infinite loops)
 
 # class GraphState(TypedDict):
 #     question: str

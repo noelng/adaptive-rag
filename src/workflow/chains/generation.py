@@ -6,12 +6,12 @@ from langchain_core.prompts import ChatPromptTemplate
 
 llm = llm_model
 # prompt = hub.pull("rlm/rag-prompt")
-# prompt = ChatPromptTemplate.from_messages([
-#     ("system", "You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise."),
-#     ("user", "Context: {context}\n\nQuestion: {question}")
-# ])
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise."),
+    ("user", "Context: {context}\n\nQuestion: {question}")
+])
 client = Client()
-prompt = client.pull_prompt("rlm/rag-prompt")
+# prompt = client.pull_prompt("rlm/rag-prompt")
 generation_chain = prompt | llm | StrOutputParser()
 
 # You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.

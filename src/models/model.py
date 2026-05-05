@@ -11,11 +11,11 @@ load_dotenv()
 # )
 
 llm_model = ChatOllama(
-    model="llama3:8b",
+    model="gemma3:1b",
     temperature=0
 )
 
 # embedding model initialization
 embed_model = GoogleGenerativeAIEmbeddings(
-    model="models/text-embedding-004"
+    model="models/gemini-embedding-001"
 )
